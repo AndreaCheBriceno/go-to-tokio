@@ -197,7 +197,27 @@ export default function SubwayMapSimulation() {
   const tLines = language === 'es' ? 'Líneas' : 'Lines';
   
   const [activeLine, setActiveLine] = useState<string | null>(null);
+  const [isAutoMode, setIsAutoMode] = useState(true);
   const [, setFrame] = useState(0);
+
+  // Auto-cycle logic
+  useEffect(() => {
+    if (!isAutoMode) return;
+    
+    const cycle = [...parsedLines.map(l => l.id), null]; // null means ALL lines
+    let currentIndex = cycle.indexOf(activeLine);
+    if (currentIndex === -1) currentIndex = 0;
+
+    const currentItem = cycle[currentIndex];
+    const duration = currentItem === null ? 4000 : 3000;
+
+    const timer = setTimeout(() => {
+      const nextIndex = (currentIndex + 1) % cycle.length;
+      setActiveLine(cycle[nextIndex]);
+    }, duration);
+
+    return () => clearTimeout(timer);
+  }, [isAutoMode, activeLine]);
 
   const trainsRef = useRef<Train[]>([]);
   const requestRef = useRef<number | undefined>(undefined);
@@ -307,10 +327,19 @@ export default function SubwayMapSimulation() {
     <div className="relative w-full max-w-5xl mx-auto border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden bg-white dark:bg-gray-950 p-4 shadow-sm">
       <div className="flex items-center gap-3 mb-4 overflow-x-auto pb-2">
         <span className="text-sm font-semibold text-gray-500 shrink-0">{tLines}:</span>
+        <button
+          onClick={() => setIsAutoMode(true)}
+          className={`px-3 py-1 rounded-full text-xs font-bold transition-opacity shrink-0 ${isAutoMode ? 'bg-gray-800 text-white dark:bg-gray-200 dark:text-black' : 'bg-gray-200 text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-300'}`}
+        >
+          Auto
+        </button>
         {parsedLines.map(l => (
           <button 
             key={l.id}
-            onClick={() => setActiveLine(activeLine === l.id ? null : l.id)}
+            onClick={() => {
+              setIsAutoMode(false);
+              setActiveLine(activeLine === l.id ? null : l.id);
+            }}
             className={`px-3 py-1 rounded-full text-xs font-bold text-white transition-opacity shrink-0 ${activeLine && activeLine !== l.id ? 'opacity-30' : 'opacity-100 hover:opacity-90'}`}
             style={{ backgroundColor: l.color }}
           >

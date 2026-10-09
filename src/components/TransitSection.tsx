@@ -35,52 +35,57 @@ export default function TransitSection() {
         </p>
       </div>
 
-      {/* 2 Cards: Climate & Airport Entry */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        {/* Climate & Best Seasons */}
-        <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-neutral-800 hover:border-amber-500/30 transition flex flex-col justify-between">
-          <div>
-            <div className="flex items-center gap-2.5 text-amber-400 mb-3">
-              <Sun className="w-5 h-5" />
-              <h3 className="text-lg font-bold text-white">
-                {isEs ? 'Clima Subtropical y Estaciones' : 'Subtropical Climate & Seasons'}
-              </h3>
+      {/* Left: climate & airport cards. Right: flight/seasons animation */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div className="lg:col-span-5 flex flex-col gap-6">
+          {/* Climate & Best Seasons */}
+          <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-neutral-800 hover:border-amber-500/30 transition flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2.5 text-amber-400 mb-3">
+                <Sun className="w-5 h-5" />
+                <h3 className="text-lg font-bold text-white">
+                  {isEs ? 'Clima Subtropical y Estaciones' : 'Subtropical Climate & Seasons'}
+                </h3>
+              </div>
+              <EditableText
+                id="climate_info"
+                defaultText={content.travelEssentials.climateText}
+                className="text-xs sm:text-sm text-neutral-300 leading-relaxed"
+              />
             </div>
-            <EditableText
-              id="climate_info"
-              defaultText={content.travelEssentials.climateText}
-              className="text-xs sm:text-sm text-neutral-300 leading-relaxed"
-            />
+            <div className="mt-4 pt-3 border-t border-neutral-800 flex flex-wrap justify-between gap-2 text-xs text-neutral-400">
+              <span>{isEs ? 'Pico: Sakura primaveral (Mar - Abr)' : 'Peak: Spring Sakura (Late Mar - Apr)'}</span>
+              <span className="text-amber-400">{isEs ? 'Follaje otoñal (Oct - Nov)' : 'Autumn Foliage (Oct - Nov)'}</span>
+            </div>
           </div>
-          <div className="mt-4 pt-3 border-t border-neutral-800 flex justify-between text-xs text-neutral-400">
-            <span>{isEs ? 'Pico: Sakura primaveral (Mar - Abr)' : 'Peak: Spring Sakura (Late Mar - Apr)'}</span>
-            <span className="text-amber-400">{isEs ? 'Follaje otoñal (Oct - Nov)' : 'Autumn Foliage (Oct - Nov)'}</span>
+
+          {/* Airport Arrival */}
+          <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-neutral-800 hover:border-cyan-500/30 transition flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2.5 text-cyan-400 mb-3">
+                <Plane className="w-5 h-5" />
+                <h3 className="text-lg font-bold text-white">
+                  {isEs ? 'Llegar a Tokio (HND y NRT)' : 'Arriving in Tokyo (HND & NRT)'}
+                </h3>
+              </div>
+              <EditableText
+                id="transit_info"
+                defaultText={content.travelEssentials.airportsText}
+                className="text-xs sm:text-sm text-neutral-300 leading-relaxed"
+              />
+            </div>
+            <div className="mt-4 pt-3 border-t border-neutral-800 flex flex-wrap justify-between gap-2 text-xs text-neutral-400">
+              <span>{isEs ? 'Haneda (HND): ~15 mins al centro' : 'Haneda (HND): ~15 mins to city'}</span>
+              <span className="text-cyan-400">{isEs ? 'Narita (NRT): ~50 mins en Narita Express' : 'Narita (NRT): ~50 mins by Narita Express'}</span>
+            </div>
           </div>
         </div>
 
-        {/* Airport Arrival */}
-        <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-neutral-800 hover:border-cyan-500/30 transition flex flex-col justify-between">
-          <div>
-            <div className="flex items-center gap-2.5 text-cyan-400 mb-3">
-              <Plane className="w-5 h-5" />
-              <h3 className="text-lg font-bold text-white">
-                {isEs ? 'Llegar a Tokio (HND y NRT)' : 'Arriving in Tokyo (HND & NRT)'}
-              </h3>
-            </div>
-            <EditableText
-              id="transit_info"
-              defaultText={content.travelEssentials.airportsText}
-              className="text-xs sm:text-sm text-neutral-300 leading-relaxed"
-            />
-          </div>
-          <div className="mt-4 pt-3 border-t border-neutral-800 flex justify-between text-xs text-neutral-400">
-            <span>{isEs ? 'Haneda (HND): ~15 mins al centro' : 'Haneda (HND): ~15 mins to city'}</span>
-            <span className="text-cyan-400">{isEs ? 'Narita (NRT): ~50 mins en Narita Express' : 'Narita (NRT): ~50 mins by Narita Express'}</span>
-          </div>
+        <div className="lg:col-span-7 lg:sticky lg:top-24">
+          <FlightSeasonsAnimation />
         </div>
       </div>
 
-      <FlightSeasonsAnimation />
     </section>
   );
 }
