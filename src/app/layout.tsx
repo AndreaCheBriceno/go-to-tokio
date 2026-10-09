@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: '🌸 Neo-Edo: Tokyo • Interactive Travel Platform | Andy Briceño',
   description:
-    'Academic English Unit 5 Project — My Town, the Best Town (Tokyo, Japan). Interactive travel platform featuring real-time Yamanote train simulation, live Sumo ring, ramen studio, and Supabase live editing.',
+    'My Town, the Best Town: Tokyo, Japan. An interactive travel guide with a subway simulation, a sumo ring, a sakura tree and live text editing.',
   icons: {
     icon: '/sakura.svg',
     shortcut: '/sakura.svg',

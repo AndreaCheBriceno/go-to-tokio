@@ -3,11 +3,6 @@
 import React from 'react';
 import { Sparkles, Coins, Trash2, Wifi, VolumeX, UtensilsCrossed, AlertCircle } from 'lucide-react';
 import { useSiteContent } from '../context/ContentContext';
-import GrammarBadge from './GrammarBadge';
-
-interface TravelTipsSectionProps {
-  grammarActive: boolean;
-}
 
 const ICON_MAP: Record<string, React.ReactNode> = {
   Coins: <Coins className="w-5 h-5 text-amber-400" />,
@@ -17,7 +12,7 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   UtensilsCrossed: <UtensilsCrossed className="w-5 h-5 text-pink-400" />,
 };
 
-export default function TravelTipsSection({ grammarActive }: TravelTipsSectionProps) {
+export default function TravelTipsSection() {
   const { content, language } = useSiteContent();
   const isEs = language === 'es';
 
@@ -30,19 +25,18 @@ export default function TravelTipsSection({ grammarActive }: TravelTipsSectionPr
             <Sparkles className="w-4 h-4 text-amber-400" />
             <span>
               {isEs
-                ? 'Requisitos de Rúbrica 9 y 14 • Consejos Inteligentes y Consejos Reportados'
-                : 'Rubric Requirements 9 & 14 • Smart Travel & Reported Advice'}
+                ? 'Consejos de Viaje'
+                : 'Travel Tips'}
             </span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
-            {isEs ? '5 Consejos Esenciales de Viaje' : '5 Essential Travel Tips'}{' '}
-            <span className="text-amber-400 text-2xl font-normal">アドバイス</span>
+            {isEs ? '5 Consejos Esenciales de Viaje' : '5 Essential Travel Tips'}
           </h2>
         </div>
         <p className="text-xs sm:text-sm text-neutral-400 max-w-md">
           {isEs
-            ? 'Muévete por Tokio como un habitante local. Cada consejo combina recomendaciones prácticas con la estructura gramatical de consejos y órdenes reportadas requerida en la Unidad 5.'
-            : 'Navigate Tokyo with the poise of a local. Every tip pairs practical travel advice with the required Unit 5 impersonal reported grammar pattern.'}
+            ? 'Muévete por Tokio como un habitante local. Cada consejo combina recomendaciones prácticas con consejos de viaje.'
+            : 'Navigate Tokyo with the poise of a local. Every tip pairs practical travel advice with helpful tips.'}
         </p>
       </div>
 
@@ -69,22 +63,6 @@ export default function TravelTipsSection({ grammarActive }: TravelTipsSectionPr
               <p className="text-xs text-neutral-300 leading-relaxed mb-4">
                 {tip.practicalTip}
               </p>
-            </div>
-
-            {/* Impersonal Reported Advice Box */}
-            <div className="mt-4 pt-3 border-t border-neutral-800/80 bg-neutral-950/60 p-3 rounded-xl border border-neutral-800">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-amber-400 block mb-1">
-                {isEs ? 'Estructura Gramatical Reportada:' : 'Reported Advice Grammar:'}
-              </span>
-              <div className="text-xs text-amber-100/90 leading-snug">
-                {grammarActive ? (
-                  <GrammarBadge type="reported" active={grammarActive}>
-                    {tip.reportedGrammar}
-                  </GrammarBadge>
-                ) : (
-                  tip.reportedGrammar
-                )}
-              </div>
             </div>
           </div>
         ))}

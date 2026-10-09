@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Sparkles, AlertTriangle, CheckCircle, Volume2 } from 'lucide-react';
 import { useSiteContent } from '../context/ContentContext';
 import EditableText from './EditableText';
+import SubwayMapSimulation from './SubwayMapSimulation';
 
 export default function ProblemSolverSection() {
   const { content, language } = useSiteContent();
@@ -36,25 +37,25 @@ export default function ProblemSolverSection() {
             <Sparkles className="w-4 h-4 text-rose-400" />
             <span>
               {isEs
-                ? 'Requisito de Rúbrica 10 • Problemas del Turista y Soluciones Prácticas'
-                : 'Rubric Requirement 10 • Tourist Problems & Practical Solutions'}
+                ? 'Problemas del Turista y Soluciones Prácticas'
+                : 'Tourist Problems & Practical Solutions'}
             </span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
             {isEs ? 'Solución a Problemas del Viajero' : 'Tourist Trouble-Shooter'}{' '}
-            <span className="text-rose-400 text-2xl font-normal">解決策</span>
+            <span className="text-rose-400 text-2xl font-normal">🆘</span>
           </h2>
         </div>
         <p className="text-xs sm:text-sm text-neutral-400 max-w-md">
           {isEs
-            ? 'Dos desafíos cotidianos que experimentan los turistas en Tokio, acompañados de soluciones prácticas y frases esenciales de supervivencia en japonés con audio interactivo.'
-            : 'Two common challenges faced by international travelers in Tokyo, paired with practical real-world solutions and essential survival Japanese phrases.'}
+            ? 'Dos desafíos cotidianos que experimentan los turistas en Tokio, acompañados de soluciones prácticas y frases esenciales.'
+            : 'Two common challenges faced by international travelers in Tokyo, paired with practical real-world solutions.'}
         </p>
       </div>
 
       {/* 2 Problem Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {content.problemSolutions.map((item) => (
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        {content.problemSolutions.map((item, idx) => (
           <div
             key={item.id}
             className="glass-panel rounded-3xl p-6 sm:p-8 border border-neutral-800 hover:border-rose-500/30 transition flex flex-col justify-between shadow-xl"
@@ -67,6 +68,15 @@ export default function ProblemSolverSection() {
                 <span className="px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs border border-rose-500/30">
                   {isEs ? 'Caso Práctico' : 'Case Study'}
                 </span>
+              </div>
+
+              {/* Visual SVG */}
+              <div className="h-32 w-full flex items-center justify-center bg-neutral-900 rounded-2xl border border-neutral-800">
+                {idx === 0 ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-neutral-500"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-neutral-500"><path d="M12 2v20"/><path d="m3 11 9-9 9 9"/><path d="M3 15h18"/><path d="M3 7h18"/></svg>
+                )}
               </div>
 
               {/* The Problem */}
@@ -107,7 +117,7 @@ export default function ProblemSolverSection() {
                 <button
                   onClick={() => speakJapanese(item.usefulJapanesePhrase)}
                   className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/40 text-xs font-bold transition"
-                  title={isEs ? 'Escuchar pronunciación nativa japonesa' : 'Listen to native Japanese pronunciation'}
+                  title={isEs ? 'Escuchar pronunciación' : 'Listen pronunciation'}
                 >
                   <Volume2 className={`w-3.5 h-3.5 ${playingPhrase ? 'animate-bounce text-white' : ''}`} />
                   <span>{playingPhrase ? (isEs ? 'Hablando...' : 'Speaking...') : (isEs ? 'Escuchar Audio' : 'Listen Audio')}</span>
@@ -126,6 +136,19 @@ export default function ProblemSolverSection() {
             </div>
           </div>
         ))}
+      </div>
+      
+      {/* Subway simulation */}
+      <div className="mt-12 w-full">
+        <h3 className="text-xl font-bold text-white mb-4 text-center">
+          {isEs ? 'Explora las rutas del metro de Tokio' : 'Explore the Tokyo Subway Routes'}
+        </h3>
+        <p className="text-sm text-neutral-400 max-w-2xl mx-auto text-center mb-8">
+          {isEs 
+            ? 'Entender el sistema de trenes es clave para sobrevivir en la ciudad. Aquí hay una simulación rápida.' 
+            : 'Understanding the train system is key to surviving the city. Here is a quick simulation.'}
+        </p>
+        <SubwayMapSimulation />
       </div>
     </section>
   );

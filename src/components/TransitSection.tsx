@@ -4,13 +4,9 @@ import React from 'react';
 import { Plane, Sun, Sparkles } from 'lucide-react';
 import { useSiteContent } from '../context/ContentContext';
 import EditableText from './EditableText';
-import TrainSimulationMap from './TrainSimulationMap';
+import FlightSeasonsAnimation from './FlightSeasonsAnimation';
 
-interface TransitSectionProps {
-  grammarActive: boolean;
-}
-
-export default function TransitSection({ grammarActive }: TransitSectionProps) {
+export default function TransitSection() {
   const { content, language } = useSiteContent();
   const isEs = language === 'es';
 
@@ -23,19 +19,19 @@ export default function TransitSection({ grammarActive }: TransitSectionProps) {
             <Sparkles className="w-4 h-4 text-emerald-400" />
             <span>
               {isEs
-                ? 'Requisitos de Rúbrica 2 y 3 • Clima, Acceso y Movilidad'
-                : 'Rubric Requirements 2 & 3 • Climate, Access & Mobility'}
+                ? 'Clima, Acceso y Movilidad'
+                : 'Climate, Access & Mobility'}
             </span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
             {isEs ? 'Cómo Llegar y Cómo Moverse' : 'Getting There & Around'}{' '}
-            <span className="text-emerald-400 text-2xl font-normal">交通</span>
+            <span className="text-emerald-400 text-2xl font-normal">🛫</span>
           </h2>
         </div>
         <p className="text-xs sm:text-sm text-neutral-400 max-w-md">
           {isEs
-            ? 'Cómo aterrizar, viajar y desplazarse por la red urbana hiperconectada de Tokio, con simulación de trenes en tiempo real y detalles climáticos.'
-            : 'How to land, ride, and navigate Tokyo\'s hyper-efficient urban grid, complete with live train line simulation and climate insights.'}
+            ? 'Cómo aterrizar y el clima.'
+            : 'How to land and the climate.'}
         </p>
       </div>
 
@@ -84,8 +80,7 @@ export default function TransitSection({ grammarActive }: TransitSectionProps) {
         </div>
       </div>
 
-      {/* Interactive Train Line Loop & Simulation */}
-      <TrainSimulationMap />
+      <FlightSeasonsAnimation />
     </section>
   );
 }

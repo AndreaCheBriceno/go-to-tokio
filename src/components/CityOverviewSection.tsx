@@ -4,13 +4,9 @@ import React from 'react';
 import { Sparkles, Building2, Map, ShieldCheck, Zap } from 'lucide-react';
 import { useSiteContent } from '../context/ContentContext';
 import EditableText from './EditableText';
-import GrammarBadge from './GrammarBadge';
+import TokyoCinematicBackdrop from './TokyoCinematicBackdrop';
 
-interface CityOverviewSectionProps {
-  grammarActive: boolean;
-}
-
-export default function CityOverviewSection({ grammarActive }: CityOverviewSectionProps) {
+export default function CityOverviewSection() {
   const { content, language } = useSiteContent();
   const isEs = language === 'es';
 
@@ -23,25 +19,31 @@ export default function CityOverviewSection({ grammarActive }: CityOverviewSecti
             <Sparkles className="w-4 h-4 text-pink-400" />
             <span>
               {isEs
-                ? 'Requisito de Rúbrica 1 • Perfil y Demografía de la Ciudad'
-                : 'Rubric Requirement 1 • City Profile & Demographics'}
+                ? 'Perfil y Demografía de la Ciudad'
+                : 'City Profile & Demographics'}
             </span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
             {isEs ? 'Resumen de la Metrópolis' : 'Metropolis Overview'}{' '}
-            <span className="text-pink-400 text-2xl font-normal">都市概要</span>
+            <span className="text-pink-400 text-2xl font-normal">🗼</span>
           </h2>
         </div>
         <p className="text-xs sm:text-sm text-neutral-400 max-w-md">
           {isEs
-            ? 'Una capital mundial densamente poblada pero excepcionalmente pacífica y segura, donde la infraestructura de punta convive con siglos de tradición Edo.'
-            : 'A densely-populated yet exceptionally peaceful world capital, where cutting-edge infrastructure blends with centuries of Edo tradition.'}
+            ? 'Una capital mundial densamente poblada pero excepcionalmente pacífica y segura.'
+            : 'A densely-populated yet exceptionally peaceful world capital.'}
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch relative">
+        
+        {/* Tokyo Cinematic Backdrop placed as absolute behind the cards */}
+        <div className="absolute inset-0 z-0 rounded-3xl overflow-hidden opacity-50 pointer-events-none">
+          <TokyoCinematicBackdrop />
+        </div>
+
         {/* Main Narrative Card */}
-        <div className="lg:col-span-7 glass-panel rounded-3xl p-6 sm:p-8 border border-neutral-800 flex flex-col justify-between space-y-6">
+        <div className="lg:col-span-7 z-10 glass-panel rounded-3xl p-6 sm:p-8 border border-neutral-800 flex flex-col justify-between space-y-6 bg-black/60 backdrop-blur-md">
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono font-bold uppercase">
               <Building2 className="w-4 h-4" />
@@ -54,41 +56,11 @@ export default function CityOverviewSection({ grammarActive }: CityOverviewSecti
                 : 'The Political, Economic & Cultural Heart of Japan'}
             </h3>
 
-            {grammarActive ? (
-              <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed space-y-3">
-                {isEs ? (
-                  <>
-                    Tokio es la capital de Japón, ubicada en la costa oriental de la isla principal de Honshu. Es una metrópolis{' '}
-                    <GrammarBadge type="compound" active={grammarActive}>
-                      densely-populated (densamente poblada)
-                    </GrammarBadge>
-                    {' '}pero extraordinariamente organizada, hogar de más de 14 millones de personas en el centro y más de 37 millones en su área metropolitana. El centro de Tokio es{' '}
-                    <GrammarBadge type="comparative" active={grammarActive}>
-                      cleaner and faster than (más limpio y más rápido que)
-                    </GrammarBadge>
-                    {' '}la gran mayoría de las capitales mundiales.
-                  </>
-                ) : (
-                  <>
-                    Tokyo is the capital city of Japan, located on the eastern coastline of the main island of Honshu. It is a{' '}
-                    <GrammarBadge type="compound" active={grammarActive}>
-                      densely-populated
-                    </GrammarBadge>{' '}
-                    yet exceptionally organized metropolis, home to approximately 14 million people in the city center and more than 37 million residents across the broader metropolitan area. Central Tokyo is{' '}
-                    <GrammarBadge type="comparative" active={grammarActive}>
-                      cleaner and faster than
-                    </GrammarBadge>{' '}
-                    most capital cities in the world.
-                  </>
-                )}
-              </p>
-            ) : (
-              <EditableText
-                id="city_overview"
-                defaultText={content.overview.description}
-                className="text-xs sm:text-sm text-neutral-300 leading-relaxed"
-              />
-            )}
+            <EditableText
+              id="city_overview"
+              defaultText={content.overview.description}
+              className="text-xs sm:text-sm text-neutral-300 leading-relaxed"
+            />
           </div>
 
           {/* Quick Pillars */}
@@ -108,7 +80,7 @@ export default function CityOverviewSection({ grammarActive }: CityOverviewSecti
                 {isEs ? 'Ultra Rápida' : 'Hyper-Fast'}
               </span>
               <span className="text-[11px] text-neutral-400">
-                {isEs ? 'Puntualidad en segundos' : 'Sub-minute transit'}
+                {isEs ? 'Puntualidad' : 'Sub-minute transit'}
               </span>
             </div>
             <div className="p-3 bg-neutral-900/60 rounded-xl border border-neutral-800 col-span-2 sm:col-span-1">
@@ -117,24 +89,24 @@ export default function CityOverviewSection({ grammarActive }: CityOverviewSecti
                 {isEs ? '23 Distritos' : '23 Special Wards'}
               </span>
               <span className="text-[11px] text-neutral-400">
-                {isEs ? 'Identidades únicas' : 'Distinct cultural vibes'}
+                {isEs ? 'Identidades' : 'Distinct vibes'}
               </span>
             </div>
           </div>
         </div>
 
-        {/* 4 Stats Grid */}
-        <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* 4 Stats Grid - Bigger */}
+        <div className="lg:col-span-5 z-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
           {content.overview.stats.map((s, idx) => (
             <div
               key={idx}
-              className="glass-panel rounded-2xl p-5 border border-neutral-800 hover:border-pink-500/30 transition flex flex-col justify-between"
+              className="glass-panel rounded-3xl p-8 border border-neutral-800 hover:border-pink-500/30 transition flex flex-col justify-between bg-black/60 backdrop-blur-md"
             >
-              <span className="text-[11px] font-mono uppercase text-neutral-400">{s.label}</span>
-              <div className="my-2">
-                <span className="text-2xl font-black text-white">{s.value}</span>
+              <span className="text-sm font-mono uppercase text-neutral-400">{s.label}</span>
+              <div className="my-4">
+                <span className="text-4xl lg:text-5xl font-black text-white break-words">{s.value}</span>
               </div>
-              <span className="text-[11px] font-semibold text-pink-400/90">{s.highlight}</span>
+              <span className="text-sm font-semibold text-pink-400/90 break-words">{s.highlight}</span>
             </div>
           ))}
         </div>

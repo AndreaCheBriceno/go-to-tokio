@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use client';
 
 import React from 'react';
@@ -8,14 +9,12 @@ import InteractiveSakuraTree from './InteractiveSakuraTree';
 import SumoRingInteractive from './SumoRingInteractive';
 
 interface LivingCultureSectionProps {
-  grammarActive: boolean;
   onShakeSakura: (x: number, y: number) => void;
   ambientSakura: boolean;
   onToggleAmbientSakura: () => void;
 }
 
 export default function LivingCultureSection({
-  grammarActive,
   onShakeSakura,
   ambientSakura,
   onToggleAmbientSakura,
@@ -32,13 +31,13 @@ export default function LivingCultureSection({
             <Sparkles className="w-4 h-4 text-pink-400" />
             <span>
               {isEs
-                ? 'Requisitos de Rúbrica 6 y 7 • Tradiciones y Festivales'
-                : 'Rubric Requirements 6 & 7 • Traditions & Festivals'}
+                ? 'Tradiciones y Festivales'
+                : 'Traditions & Festivals'}
             </span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
             {isEs ? 'Cultura Viva y Tradición' : 'Living Culture & Heritage'}{' '}
-            <span className="text-pink-400 text-2xl font-normal">伝統</span>
+            <span className="text-pink-400 text-2xl font-normal">⛩️</span>
           </h2>
         </div>
         <p className="text-xs sm:text-sm text-neutral-400 max-w-md">
@@ -69,7 +68,7 @@ export default function LivingCultureSection({
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
           <div className="absolute bottom-3 left-3">
             <span className="text-[10px] font-mono text-pink-400 bg-black/60 px-2 py-0.5 rounded">
-              {isEs ? 'Gran Festival Sintoísta (祭)' : 'Major Shinto Festival (祭)'}
+              {isEs ? 'Gran Festival Sintoísta (神道)' : 'Major Shinto Festival (神道)'}
             </span>
             <h4 className="text-xl font-bold text-white mt-1">{content.traditions[2].name}</h4>
           </div>
@@ -80,10 +79,13 @@ export default function LivingCultureSection({
             <Calendar className="w-4 h-4" />
             <span>
               {isEs
-                ? 'Celebrado en Años Impares a Mediados de Mayo • Santuario Kanda Myojin'
-                : 'Celebrated Biennially in Mid-May • Kanda Myojin Shrine'}
+                ? 'Celebrado en Años Impares a Mediados de Mayo — Santuario Kanda Myojin'
+                : 'Celebrated Biennially in Mid-May — Kanda Myojin Shrine'}
             </span>
           </div>
+          <h4 className="text-lg font-semibold text-pink-400 uppercase tracking-wider">
+            {isEs ? 'Festival principal' : 'Main festival'}
+          </h4>
           <h3 className="text-2xl font-bold text-white">
             {isEs
               ? 'La Gran Procesión Histórica de Kanda Matsuri'

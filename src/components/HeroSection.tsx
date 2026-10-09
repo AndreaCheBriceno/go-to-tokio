@@ -4,19 +4,16 @@ import React from 'react';
 import { MapPin, Users, Calendar, Sparkles, ArrowRight, BookOpen, MousePointer2 } from 'lucide-react';
 import { useSiteContent } from '../context/ContentContext';
 import EditableText from './EditableText';
-import GrammarBadge from './GrammarBadge';
 
 interface HeroSectionProps {
-  grammarActive: boolean;
-  onOpenBrochure: () => void;
-  onToggleLaser: () => void;
+  onOpenBrochure?: () => void;
+  onToggleLaser?: () => void;
 }
 
 export default function HeroSection({
-  grammarActive,
   onOpenBrochure,
   onToggleLaser,
-}: HeroSectionProps) {
+}: HeroSectionProps = {}) {
   const { content, language } = useSiteContent();
   const isEs = language === 'es';
 
@@ -52,44 +49,14 @@ export default function HeroSection({
         <span className="h-px w-12 bg-pink-500/50" />
       </div>
 
-      {/* Descriptive Copy with Grammar highlights */}
+      {/* Descriptive Copy */}
       <div className="max-w-2xl mx-auto text-neutral-300 text-sm sm:text-lg mt-3 mb-8 leading-relaxed">
-        {grammarActive ? (
-          <p>
-            {isEs ? (
-              <>
-                ¡Te damos la bienvenida a la vibrante capital de Japón — una metrópolis{' '}
-                <GrammarBadge type="compound" active={grammarActive}>
-                  world-famous (famosa mundialmente)
-                </GrammarBadge>
-                {' '}y de{' '}
-                <GrammarBadge type="compound" active={grammarActive}>
-                  high-tech (alta tecnología)
-                </GrammarBadge>
-                {' '}donde la tradición milenaria se fusiona con el futuro!
-              </>
-            ) : (
-              <>
-                Welcome to Japan&apos;s vibrant capital — a{' '}
-                <GrammarBadge type="compound" active={grammarActive}>
-                  world-famous
-                </GrammarBadge>
-                ,{' '}
-                <GrammarBadge type="compound" active={grammarActive}>
-                  high-tech
-                </GrammarBadge>{' '}
-                metropolis where ancient tradition meets the future!
-              </>
-            )}
-          </p>
-        ) : (
-          <EditableText
-            id="hero_subtitle"
-            defaultText={content.hero.subheadline}
-            className="text-neutral-300"
-            as="p"
-          />
-        )}
+        <EditableText
+          id="hero_subtitle"
+          defaultText={content.hero.subheadline}
+          className="text-neutral-300"
+          as="p"
+        />
       </div>
 
       {/* Action Buttons */}
@@ -119,7 +86,7 @@ export default function HeroSection({
         </button>
       </div>
 
-      {/* City Profile Metrics Bar (Rubric Requirement 1: City name, location, population) */}
+      {/* City Profile Metrics Bar (City name, location, population) */}
       <div className="w-full max-w-5xl glass-panel-glow rounded-3xl p-5 sm:p-6 grid grid-cols-2 lg:grid-cols-4 gap-4 text-left border border-cyan-500/30">
         <div className="flex items-start gap-3 p-2">
           <div className="w-9 h-9 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center shrink-0 border border-pink-500/30">

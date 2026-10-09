@@ -1,18 +1,30 @@
+/* eslint-disable */
 'use client';
 
-import React from 'react';
-import { Sparkles, Compass, Train } from 'lucide-react';
+import React, { useState } from 'react';
+import { Sparkles, Compass, Train, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useSiteContent } from '../context/ContentContext';
 import EditableText from './EditableText';
-import GrammarBadge from './GrammarBadge';
 
-interface DayTripSectionProps {
-  grammarActive: boolean;
-}
-
-export default function DayTripSection({ grammarActive }: DayTripSectionProps) {
+export default function DayTripSection() {
   const { content, language } = useSiteContent();
   const isEs = language === 'es';
+  
+  const images = [
+    '/images/kamakura/buddha.jpg',
+    '/images/kamakura/hokokuji.jpg',
+    '/images/kamakura/yuigahama.jpg'
+  ];
+  
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const nextImage = () => {
+    setCurrentImage((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+  };
 
   return (
     <section id="daytrip" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto">
@@ -23,13 +35,13 @@ export default function DayTripSection({ grammarActive }: DayTripSectionProps) {
             <Sparkles className="w-4 h-4 text-teal-400" />
             <span>
               {isEs
-                ? 'Requisito de Rúbrica 8 • Excursión de 1 Día Recomendada'
-                : 'Rubric Requirement 8 • Recommended Day Excursion'}
+                ? 'Excursión de 1 Día Recomendada'
+                : 'Recommended Day Excursion'}
             </span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
             {isEs ? 'Excursión: Kamakura Histórico' : 'Day Trip: Historic Kamakura'}{' '}
-            <span className="text-teal-400 text-2xl font-normal">鎌倉</span>
+            <span className="text-teal-400 text-2xl font-normal">🌊</span>
           </h2>
         </div>
         <p className="text-xs sm:text-sm text-neutral-400 max-w-md">
@@ -41,21 +53,38 @@ export default function DayTripSection({ grammarActive }: DayTripSectionProps) {
 
       {/* Main Showcase Banner */}
       <div className="glass-panel rounded-3xl overflow-hidden border border-teal-500/30 grid grid-cols-1 lg:grid-cols-12 shadow-2xl">
-        {/* Left Visual */}
-        <div className="lg:col-span-6 relative min-h-[300px] lg:min-h-full overflow-hidden">
+        {/* Left Visual - Small Gallery */}
+        <div className="lg:col-span-6 relative min-h-[300px] lg:min-h-full overflow-hidden group">
           <img
-            src={content.dayTrip.image}
-            alt="Great Buddha of Kamakura"
-            className="w-full h-full object-cover"
+            src={images[currentImage]}
+            alt="Kamakura"
+            className="w-full h-full object-cover transition duration-500"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#121622]" />
-          <div className="absolute bottom-5 left-5 right-5">
-            <span className="text-xs font-mono uppercase bg-teal-600/80 text-white px-3 py-1 rounded-full font-bold">
-              {isEs ? 'Prefectura de Kanagawa (神奈川)' : 'Kanagawa Prefecture (神奈川)'}
-            </span>
-            <h3 className="text-2xl font-black text-white mt-2">
-              {isEs ? 'El Gran Buda de Kotoku-in (高徳院の大仏)' : 'The Great Buddha of Kotoku-in (高徳院の大仏)'}
-            </h3>
+          
+          <button onClick={prevImage} className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-black/50 text-white rounded-full opacity-0 group-hover:opacity-100 transition">
+            <ChevronLeft />
+          </button>
+          <button onClick={nextImage} className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-black/50 text-white rounded-full opacity-0 group-hover:opacity-100 transition">
+            <ChevronRight />
+          </button>
+          
+          <div className="absolute bottom-5 left-5 right-5 flex justify-between items-end">
+            <div>
+              <span className="text-xs font-mono uppercase bg-teal-600/80 text-white px-3 py-1 rounded-full font-bold">
+                {isEs ? 'Prefectura de Kanagawa' : 'Kanagawa Prefecture'}
+              </span>
+              <h3 className="text-2xl font-black text-white mt-2">
+                {currentImage === 0 && (isEs ? 'El Gran Buda de Kotoku-in' : 'The Great Buddha of Kotoku-in')}
+                {currentImage === 1 && (isEs ? 'Bosque de Bambú Hokokuji' : 'Hokokuji Bamboo Grove')}
+                {currentImage === 2 && (isEs ? 'Playa Yuigahama' : 'Yuigahama Beach')}
+              </h3>
+            </div>
+            <div className="flex gap-1.5 pb-2 pr-2">
+              {images.map((_, i) => (
+                <div key={i} className={`w-2 h-2 rounded-full ${currentImage === i ? 'bg-white' : 'bg-white/30'}`} />
+              ))}
+            </div>
           </div>
         </div>
 
@@ -72,39 +101,17 @@ export default function DayTripSection({ grammarActive }: DayTripSectionProps) {
                   {isEs ? 'Ruta de Acceso:' : 'Access Route:'}
                 </span>
                 <span className="text-white font-semibold">
-                  {isEs ? 'Estación de Tokio → Estación de Kamakura (55 mins)' : 'Tokyo Station → Kamakura Station (55 mins)'}
+                  {isEs ? 'Estación de Tokio ➔ Estación de Kamakura (55 mins)' : 'Tokyo Station ➔ Kamakura Station (55 mins)'}
                 </span>
               </div>
               <span className="text-teal-400 font-mono text-[11px] font-bold">JR Yokosuka Line</span>
             </div>
 
-            {grammarActive ? (
-              <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
-                {isEs ? (
-                  <>
-                    Para los viajeros que buscan una pausa del ritmo de la gran ciudad, Kamakura ofrece una escapada{' '}
-                    <GrammarBadge type="compound" active={grammarActive}>
-                      slow-paced (de ritmo tranquilo)
-                    </GrammarBadge>
-                    {' '}junto al mar. Rodeado de colinas boscosas y el océano Pacífico, este histórico pueblo fue la capital militar samurai de Japón en el siglo XII.
-                  </>
-                ) : (
-                  <>
-                    For travelers seeking a break from the metropolis, Kamakura provides a quiet,{' '}
-                    <GrammarBadge type="compound" active={grammarActive}>
-                      slow-paced
-                    </GrammarBadge>{' '}
-                    coastal escape. Surrounded by forested hills and the Pacific Ocean, this historic town served as the samurai capital of Japan in the 12th century.
-                  </>
-                )}
-              </p>
-            ) : (
-              <EditableText
-                id="kamakura_desc"
-                defaultText={content.dayTrip.description}
-                className="text-xs sm:text-sm text-neutral-300 leading-relaxed"
-              />
-            )}
+            <EditableText
+              id="kamakura_desc"
+              defaultText={content.dayTrip.description}
+              className="text-xs sm:text-sm text-neutral-300 leading-relaxed"
+            />
 
             {/* Highlights List */}
             <div className="space-y-2 pt-2">
@@ -134,3 +141,4 @@ export default function DayTripSection({ grammarActive }: DayTripSectionProps) {
     </section>
   );
 }
+
