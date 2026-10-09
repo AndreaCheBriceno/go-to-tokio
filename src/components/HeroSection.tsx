@@ -1,19 +1,11 @@
 'use client';
 
 import React from 'react';
-import { MapPin, Users, Calendar, Sparkles, ArrowRight, BookOpen, MousePointer2 } from 'lucide-react';
+import { MapPin, Users, Calendar, Sparkles, ArrowRight } from 'lucide-react';
 import { useSiteContent } from '../context/ContentContext';
 import EditableText from './EditableText';
 
-interface HeroSectionProps {
-  onOpenBrochure?: () => void;
-  onToggleLaser?: () => void;
-}
-
-export default function HeroSection({
-  onOpenBrochure,
-  onToggleLaser,
-}: HeroSectionProps = {}) {
+export default function HeroSection() {
   const { content, language } = useSiteContent();
   const isEs = language === 'es';
 
@@ -69,21 +61,21 @@ export default function HeroSection({
           <ArrowRight className="w-4 h-4" />
         </a>
 
-        <button
-          onClick={onOpenBrochure}
-          className="px-6 py-3 rounded-full bg-neutral-900/90 hover:bg-neutral-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 border border-neutral-700 hover:border-pink-500/50 shadow-md transition"
+        <a
+          href="#transit"
+          className="px-6 py-3 rounded-full bg-neutral-900/90 hover:bg-neutral-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 border border-neutral-700 hover:border-cyan-500/50 shadow-md transition"
         >
-          <BookOpen className="w-4 h-4 text-pink-400" />
-          <span>{isEs ? 'Ver Tríptico Digital (Folleto)' : 'View 3-Fold Brochure (Tríptico)'}</span>
-        </button>
+          <span>{isEs ? 'Cómo Llegar y Vuelos' : 'Getting There & Flights'}</span>
+          <ArrowRight className="w-4 h-4 text-cyan-400" />
+        </a>
 
-        <button
-          onClick={onToggleLaser}
-          className="px-5 py-3 rounded-full bg-red-950/40 hover:bg-red-900/40 text-red-300 font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 border border-red-500/40 shadow-[0_0_15px_rgba(255,0,85,0.2)] transition"
+        <a
+          href="#culture"
+          className="px-6 py-3 rounded-full bg-neutral-900/90 hover:bg-neutral-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 border border-neutral-700 hover:border-amber-500/50 shadow-md transition"
         >
-          <MousePointer2 className="w-4 h-4 text-red-400" />
-          <span>{isEs ? 'Modo Láser para Exposición' : 'Laser Mode for Class'}</span>
-        </button>
+          <span>{isEs ? 'Cultura y Sumo' : 'Culture & Sumo'}</span>
+          <ArrowRight className="w-4 h-4 text-amber-400" />
+        </a>
       </div>
 
       {/* City Profile Metrics Bar (City name, location, population) */}
