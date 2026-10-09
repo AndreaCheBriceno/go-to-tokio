@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { MapPin, Users, Sun, Calendar, Sparkles, ArrowRight, BookOpen, MousePointer2 } from 'lucide-react';
+import { MapPin, Users, Calendar, Sparkles, ArrowRight, BookOpen, MousePointer2 } from 'lucide-react';
 import { useSiteContent } from '../context/ContentContext';
 import EditableText from './EditableText';
 import GrammarBadge from './GrammarBadge';
@@ -17,7 +17,8 @@ export default function HeroSection({
   onOpenBrochure,
   onToggleLaser,
 }: HeroSectionProps) {
-  const { content } = useSiteContent();
+  const { content, language } = useSiteContent();
+  const isEs = language === 'es';
 
   return (
     <section className="relative min-h-[90vh] flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-12 pb-20 overflow-hidden">
@@ -55,15 +56,31 @@ export default function HeroSection({
       <div className="max-w-2xl mx-auto text-neutral-300 text-sm sm:text-lg mt-3 mb-8 leading-relaxed">
         {grammarActive ? (
           <p>
-            Welcome to Japan&apos;s vibrant capital — a{' '}
-            <GrammarBadge type="compound" active={grammarActive}>
-              world-famous
-            </GrammarBadge>
-            ,{' '}
-            <GrammarBadge type="compound" active={grammarActive}>
-              high-tech
-            </GrammarBadge>{' '}
-            metropolis where ancient tradition meets the future!
+            {isEs ? (
+              <>
+                ¡Te damos la bienvenida a la vibrante capital de Japón — una metrópolis{' '}
+                <GrammarBadge type="compound" active={grammarActive}>
+                  world-famous (famosa mundialmente)
+                </GrammarBadge>
+                {' '}y de{' '}
+                <GrammarBadge type="compound" active={grammarActive}>
+                  high-tech (alta tecnología)
+                </GrammarBadge>
+                {' '}donde la tradición milenaria se fusiona con el futuro!
+              </>
+            ) : (
+              <>
+                Welcome to Japan&apos;s vibrant capital — a{' '}
+                <GrammarBadge type="compound" active={grammarActive}>
+                  world-famous
+                </GrammarBadge>
+                ,{' '}
+                <GrammarBadge type="compound" active={grammarActive}>
+                  high-tech
+                </GrammarBadge>{' '}
+                metropolis where ancient tradition meets the future!
+              </>
+            )}
           </p>
         ) : (
           <EditableText
@@ -81,7 +98,7 @@ export default function HeroSection({
           href="#attractions"
           className="px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-400 hover:to-rose-500 text-white font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 shadow-[0_0_20px_rgba(255,42,133,0.4)] transition transform hover:scale-105 active:scale-95"
         >
-          <span>Explore 5 Attractions</span>
+          <span>{isEs ? 'Explorar 5 Atracciones' : 'Explore 5 Attractions'}</span>
           <ArrowRight className="w-4 h-4" />
         </a>
 
@@ -90,7 +107,7 @@ export default function HeroSection({
           className="px-6 py-3 rounded-full bg-neutral-900/90 hover:bg-neutral-800 text-white font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 border border-neutral-700 hover:border-pink-500/50 shadow-md transition"
         >
           <BookOpen className="w-4 h-4 text-pink-400" />
-          <span>View 3-Fold Brochure (Tríptico)</span>
+          <span>{isEs ? 'Ver Tríptico Digital (Folleto)' : 'View 3-Fold Brochure (Tríptico)'}</span>
         </button>
 
         <button
@@ -98,7 +115,7 @@ export default function HeroSection({
           className="px-5 py-3 rounded-full bg-red-950/40 hover:bg-red-900/40 text-red-300 font-bold text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 border border-red-500/40 shadow-[0_0_15px_rgba(255,0,85,0.2)] transition"
         >
           <MousePointer2 className="w-4 h-4 text-red-400" />
-          <span>Laser Mode for Class</span>
+          <span>{isEs ? 'Modo Láser para Exposición' : 'Laser Mode for Class'}</span>
         </button>
       </div>
 
@@ -109,9 +126,15 @@ export default function HeroSection({
             <MapPin className="w-5 h-5" />
           </div>
           <div>
-            <span className="text-[11px] font-mono text-neutral-400 uppercase block">Location</span>
-            <span className="text-sm sm:text-base font-bold text-white block">Honshu Island</span>
-            <span className="text-[11px] text-pink-300/80">Kanto Eastern Coast</span>
+            <span className="text-[11px] font-mono text-neutral-400 uppercase block">
+              {isEs ? 'Ubicación' : 'Location'}
+            </span>
+            <span className="text-sm sm:text-base font-bold text-white block">
+              {isEs ? 'Isla de Honshu' : 'Honshu Island'}
+            </span>
+            <span className="text-[11px] text-pink-300/80">
+              {isEs ? 'Costa Oriental de Kanto' : 'Kanto Eastern Coast'}
+            </span>
           </div>
         </div>
 
@@ -120,9 +143,15 @@ export default function HeroSection({
             <Users className="w-5 h-5" />
           </div>
           <div>
-            <span className="text-[11px] font-mono text-neutral-400 uppercase block">City Population</span>
-            <span className="text-sm sm:text-base font-bold text-white block">14+ Million</span>
-            <span className="text-[11px] text-cyan-300/80">Central Wards Area</span>
+            <span className="text-[11px] font-mono text-neutral-400 uppercase block">
+              {isEs ? 'Población Urbana' : 'City Population'}
+            </span>
+            <span className="text-sm sm:text-base font-bold text-white block">
+              {isEs ? 'Más de 14 Millones' : '14+ Million'}
+            </span>
+            <span className="text-[11px] text-cyan-300/80">
+              {isEs ? 'Distritos Especiales' : 'Central Wards Area'}
+            </span>
           </div>
         </div>
 
@@ -131,9 +160,15 @@ export default function HeroSection({
             <Users className="w-5 h-5" />
           </div>
           <div>
-            <span className="text-[11px] font-mono text-neutral-400 uppercase block">Metro Population</span>
-            <span className="text-sm sm:text-base font-bold text-white block">37+ Million</span>
-            <span className="text-[11px] text-purple-300/80">Greater Tokyo Region</span>
+            <span className="text-[11px] font-mono text-neutral-400 uppercase block">
+              {isEs ? 'Gran Área Metro' : 'Metro Population'}
+            </span>
+            <span className="text-sm sm:text-base font-bold text-white block">
+              {isEs ? 'Más de 37 Millones' : '37+ Million'}
+            </span>
+            <span className="text-[11px] text-purple-300/80">
+              {isEs ? 'Región Metropolitana' : 'Greater Tokyo Region'}
+            </span>
           </div>
         </div>
 
@@ -142,9 +177,15 @@ export default function HeroSection({
             <Calendar className="w-5 h-5" />
           </div>
           <div>
-            <span className="text-[11px] font-mono text-neutral-400 uppercase block">Best Seasons</span>
-            <span className="text-sm sm:text-base font-bold text-white block">Spring &amp; Autumn</span>
-            <span className="text-[11px] text-amber-300/80">Sakura &amp; Autumn Leaves</span>
+            <span className="text-[11px] font-mono text-neutral-400 uppercase block">
+              {isEs ? 'Mejores Épocas' : 'Best Seasons'}
+            </span>
+            <span className="text-sm sm:text-base font-bold text-white block">
+              {isEs ? 'Primavera y Otoño' : 'Spring & Autumn'}
+            </span>
+            <span className="text-[11px] text-amber-300/80">
+              {isEs ? 'Sakura y Arces Dorados' : 'Sakura & Autumn Leaves'}
+            </span>
           </div>
         </div>
       </div>

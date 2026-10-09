@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, Calendar, Heart } from 'lucide-react';
+import { Sparkles, Calendar } from 'lucide-react';
 import { useSiteContent } from '../context/ContentContext';
 import EditableText from './EditableText';
 import InteractiveSakuraTree from './InteractiveSakuraTree';
@@ -20,7 +20,8 @@ export default function LivingCultureSection({
   ambientSakura,
   onToggleAmbientSakura,
 }: LivingCultureSectionProps) {
-  const { content } = useSiteContent();
+  const { content, language } = useSiteContent();
+  const isEs = language === 'es';
 
   return (
     <section id="culture" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto">
@@ -29,14 +30,21 @@ export default function LivingCultureSection({
         <div>
           <div className="flex items-center gap-2 text-pink-400 text-xs font-semibold uppercase tracking-wider mb-2">
             <Sparkles className="w-4 h-4 text-pink-400" />
-            <span>Rubric Requirements 6 &amp; 7 • Traditions &amp; Festivals</span>
+            <span>
+              {isEs
+                ? 'Requisitos de Rúbrica 6 y 7 • Tradiciones y Festivales'
+                : 'Rubric Requirements 6 & 7 • Traditions & Festivals'}
+            </span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
-            Living Culture &amp; Heritage <span className="text-pink-400 text-2xl font-normal">伝統</span>
+            {isEs ? 'Cultura Viva y Tradición' : 'Living Culture & Heritage'}{' '}
+            <span className="text-pink-400 text-2xl font-normal">伝統</span>
           </h2>
         </div>
         <p className="text-xs sm:text-sm text-neutral-400 max-w-md">
-          Step beyond the neon skyscrapers into Tokyo&apos;s spiritual roots: spring cherry blossom picnics, thundering Sumo bouts, and ancient Shinto processions.
+          {isEs
+            ? 'Ve más allá de los rascacielos iluminados para conectar con el alma espiritual de Tokio: picnics bajo los cerezos en flor, combates atronadores de Sumo y ancestrales procesiones sintoístas.'
+            : 'Step beyond the neon skyscrapers into Tokyo\'s spiritual roots: spring cherry blossom picnics, thundering Sumo bouts, and ancient Shinto processions.'}
         </p>
       </div>
 
@@ -61,7 +69,7 @@ export default function LivingCultureSection({
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
           <div className="absolute bottom-3 left-3">
             <span className="text-[10px] font-mono text-pink-400 bg-black/60 px-2 py-0.5 rounded">
-              Major Shinto Festival (祭)
+              {isEs ? 'Gran Festival Sintoísta (祭)' : 'Major Shinto Festival (祭)'}
             </span>
             <h4 className="text-xl font-bold text-white mt-1">{content.traditions[2].name}</h4>
           </div>
@@ -70,10 +78,16 @@ export default function LivingCultureSection({
         <div className="md:col-span-7 space-y-4">
           <div className="flex items-center gap-2 text-xs text-amber-400 font-mono">
             <Calendar className="w-4 h-4" />
-            <span>Celebrated Biennially in Mid-May • Kanda Myojin Shrine</span>
+            <span>
+              {isEs
+                ? 'Celebrado en Años Impares a Mediados de Mayo • Santuario Kanda Myojin'
+                : 'Celebrated Biennially in Mid-May • Kanda Myojin Shrine'}
+            </span>
           </div>
           <h3 className="text-2xl font-bold text-white">
-            The Historic Kanda Matsuri Grand Procession
+            {isEs
+              ? 'La Gran Procesión Histórica de Kanda Matsuri'
+              : 'The Historic Kanda Matsuri Grand Procession'}
           </h3>
           <EditableText
             id="kanda_desc"
@@ -81,7 +95,10 @@ export default function LivingCultureSection({
             className="text-xs sm:text-sm text-neutral-300 leading-relaxed"
           />
           <div className="p-3 bg-neutral-900/80 rounded-xl border border-neutral-800 text-xs text-neutral-300">
-            <strong>Key Highlights:</strong> Over 200 portable mikoshi shrines carried by thousands of parishioners in historical Edo garments to bring blessings to the metropolis.
+            <strong>{isEs ? 'Puntos Clave:' : 'Key Highlights:'}</strong>{' '}
+            {isEs
+              ? 'Más de 200 santuarios portátiles mikoshi transportados por miles de feligreses con indumentaria de la época Edo para otorgar prosperidad a la ciudad.'
+              : 'Over 200 portable mikoshi shrines carried by thousands of parishioners in historical Edo garments to bring blessings to the metropolis.'}
           </div>
         </div>
       </div>

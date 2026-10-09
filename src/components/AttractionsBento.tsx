@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, MapPin, Tag } from 'lucide-react';
+import { Sparkles, Tag } from 'lucide-react';
 import { useSiteContent } from '../context/ContentContext';
 import EditableText from './EditableText';
 import GrammarBadge from './GrammarBadge';
@@ -11,7 +11,8 @@ interface AttractionsBentoProps {
 }
 
 export default function AttractionsBento({ grammarActive }: AttractionsBentoProps) {
-  const { content } = useSiteContent();
+  const { content, language } = useSiteContent();
+  const isEs = language === 'es';
 
   return (
     <section id="attractions" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto">
@@ -20,14 +21,21 @@ export default function AttractionsBento({ grammarActive }: AttractionsBentoProp
         <div>
           <div className="flex items-center gap-2 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-2">
             <Sparkles className="w-4 h-4 text-cyan-400" />
-            <span>Rubric Requirement 4 • Core Travel Destination Guide</span>
+            <span>
+              {isEs
+                ? 'Requisito de Rúbrica 4 • Guía Principal de 5 Destinos'
+                : 'Rubric Requirement 4 • Core Travel Destination Guide'}
+            </span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
-            Top 5 Must-See Attractions <span className="text-cyan-400 text-2xl font-normal">名所</span>
+            {isEs ? '5 Atracciones Imperdibles' : 'Top 5 Must-See Attractions'}{' '}
+            <span className="text-cyan-400 text-2xl font-normal">名所</span>
           </h2>
         </div>
         <p className="text-xs sm:text-sm text-neutral-400 max-w-md">
-          Explore the contrasting faces of Tokyo: ancient 7th-century shrines, neon pedestrian scrambles, soaring towers, and subculture meccas.
+          {isEs
+            ? 'Explora las caras contrastantes de Tokio: templos milenarios del siglo VII, cruces peatonales iluminados por neón, torres colosales y mecas de la cultura pop.'
+            : 'Explore the contrasting faces of Tokyo: ancient 7th-century shrines, neon pedestrian scrambles, soaring towers, and subculture meccas.'}
         </p>
       </div>
 
@@ -44,7 +52,7 @@ export default function AttractionsBento({ grammarActive }: AttractionsBentoProp
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
             <div className="absolute top-4 left-4 flex gap-2">
               <span className="px-3 py-1 rounded-full bg-red-600/80 backdrop-blur-md text-white font-mono text-xs font-bold shadow-lg">
-                #1 Ancient Heritage
+                #1 {isEs ? 'Herencia Ancestral' : 'Ancient Heritage'}
               </span>
               <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-neutral-200 text-xs border border-white/10">
                 {content.attractions[0].district}
@@ -92,7 +100,7 @@ export default function AttractionsBento({ grammarActive }: AttractionsBentoProp
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
             <div className="absolute top-4 left-4 flex gap-2">
               <span className="px-3 py-1 rounded-full bg-cyan-600/80 backdrop-blur-md text-white font-mono text-xs font-bold shadow-lg">
-                #2 Urban Center
+                #2 {isEs ? 'Centro Urbano Neón' : 'Urban Center'}
               </span>
             </div>
             <div className="absolute bottom-4 left-4 right-4">
@@ -108,11 +116,23 @@ export default function AttractionsBento({ grammarActive }: AttractionsBentoProp
           <div className="p-6 space-y-4">
             {grammarActive ? (
               <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
-                The beating heart of modern Tokyo with famous neon-lit crosswalks. Globally recognized as{' '}
-                <GrammarBadge type="superlative" active={grammarActive}>
-                  the busiest
-                </GrammarBadge>{' '}
-                pedestrian intersection in the world, where thousands cross together under massive video billboards.
+                {isEs ? (
+                  <>
+                    El corazón palpitante del Tokio contemporáneo con sus icónicos cruces iluminados. Reconocido mundialmente como{' '}
+                    <GrammarBadge type="superlative" active={grammarActive}>
+                      the busiest (el más transitado)
+                    </GrammarBadge>
+                    {' '}cruce peatonal de todo el planeta, donde miles cruzan a la vez bajo gigantescas pantallas digitales.
+                  </>
+                ) : (
+                  <>
+                    The beating heart of modern Tokyo with famous neon-lit crosswalks. Globally recognized as{' '}
+                    <GrammarBadge type="superlative" active={grammarActive}>
+                      the busiest
+                    </GrammarBadge>{' '}
+                    pedestrian intersection in the world, where thousands cross together under massive video billboards.
+                  </>
+                )}
               </p>
             ) : (
               <EditableText
@@ -147,7 +167,7 @@ export default function AttractionsBento({ grammarActive }: AttractionsBentoProp
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
             <div className="absolute top-4 left-4">
               <span className="px-3 py-1 rounded-full bg-purple-600/80 backdrop-blur-md text-white font-mono text-xs font-bold">
-                #3 Panoramic View
+                #3 {isEs ? 'Vista Panorámica' : 'Panoramic View'}
               </span>
             </div>
             <div className="absolute bottom-4 left-4 right-4">
@@ -161,11 +181,23 @@ export default function AttractionsBento({ grammarActive }: AttractionsBentoProp
           <div className="p-5 space-y-3">
             {grammarActive ? (
               <p className="text-xs text-neutral-300 leading-relaxed">
-                Rising 634 meters above the metropolis, its glass decks offer{' '}
-                <GrammarBadge type="superlative" active={grammarActive}>
-                  the most impressive
-                </GrammarBadge>{' '}
-                360-degree views of the entire region, with Mount Fuji visible on clear days.
+                {isEs ? (
+                  <>
+                    Elevándose 634 metros, sus plataformas de cristal ofrecen{' '}
+                    <GrammarBadge type="superlative" active={grammarActive}>
+                      the most impressive (las más impresionantes)
+                    </GrammarBadge>
+                    {' '}vistas panorámicas de 360 grados, con el Monte Fuji recortado en el horizonte en días claros.
+                  </>
+                ) : (
+                  <>
+                    Rising 634 meters above the metropolis, its glass decks offer{' '}
+                    <GrammarBadge type="superlative" active={grammarActive}>
+                      the most impressive
+                    </GrammarBadge>{' '}
+                    360-degree views of the entire region, with Mount Fuji visible on clear days.
+                  </>
+                )}
               </p>
             ) : (
               <EditableText
@@ -196,7 +228,7 @@ export default function AttractionsBento({ grammarActive }: AttractionsBentoProp
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
             <div className="absolute top-4 left-4">
               <span className="px-3 py-1 rounded-full bg-pink-600/80 backdrop-blur-md text-white font-mono text-xs font-bold">
-                #4 Anime &amp; Tech
+                #4 {isEs ? 'Anime y Tech' : 'Anime & Tech'}
               </span>
             </div>
             <div className="absolute bottom-4 left-4 right-4">
@@ -210,11 +242,23 @@ export default function AttractionsBento({ grammarActive }: AttractionsBentoProp
           <div className="p-5 space-y-3">
             {grammarActive ? (
               <p className="text-xs text-neutral-300 leading-relaxed">
-                The global center of electronics, anime, gaming, and manga culture. Akihabara represents Tokyo&apos;s{' '}
-                <GrammarBadge type="compound" active={grammarActive}>
-                  high-tech
-                </GrammarBadge>{' '}
-                identity with multi-floor arcades and electronics superstores.
+                {isEs ? (
+                  <>
+                    La meca internacional de la electrónica, los videojuegos y el manga. Akihabara representa la identidad{' '}
+                    <GrammarBadge type="compound" active={grammarActive}>
+                      high-tech (de alta tecnología)
+                    </GrammarBadge>
+                    {' '}de Tokio con arcades retro de múltiples plantas y tiendas especializadas.
+                  </>
+                ) : (
+                  <>
+                    The global center of electronics, anime, gaming, and manga culture. Akihabara represents Tokyo&apos;s{' '}
+                    <GrammarBadge type="compound" active={grammarActive}>
+                      high-tech
+                    </GrammarBadge>{' '}
+                    identity with multi-floor arcades and electronics superstores.
+                  </>
+                )}
               </p>
             ) : (
               <EditableText
@@ -245,7 +289,7 @@ export default function AttractionsBento({ grammarActive }: AttractionsBentoProp
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
             <div className="absolute top-4 left-4">
               <span className="px-3 py-1 rounded-full bg-emerald-600/80 backdrop-blur-md text-white font-mono text-xs font-bold">
-                #5 Sacred Forest
+                #5 {isEs ? 'Bosque Sagrado' : 'Sacred Forest'}
               </span>
             </div>
             <div className="absolute bottom-4 left-4 right-4">

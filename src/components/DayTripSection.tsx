@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, MapPin, Compass, Train, Clock } from 'lucide-react';
+import { Sparkles, Compass, Train } from 'lucide-react';
 import { useSiteContent } from '../context/ContentContext';
 import EditableText from './EditableText';
 import GrammarBadge from './GrammarBadge';
@@ -11,7 +11,8 @@ interface DayTripSectionProps {
 }
 
 export default function DayTripSection({ grammarActive }: DayTripSectionProps) {
-  const { content } = useSiteContent();
+  const { content, language } = useSiteContent();
+  const isEs = language === 'es';
 
   return (
     <section id="daytrip" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto">
@@ -20,14 +21,21 @@ export default function DayTripSection({ grammarActive }: DayTripSectionProps) {
         <div>
           <div className="flex items-center gap-2 text-teal-400 text-xs font-semibold uppercase tracking-wider mb-2">
             <Sparkles className="w-4 h-4 text-teal-400" />
-            <span>Rubric Requirement 8 • Recommended Day Excursion</span>
+            <span>
+              {isEs
+                ? 'Requisito de Rúbrica 8 • Excursión de 1 Día Recomendada'
+                : 'Rubric Requirement 8 • Recommended Day Excursion'}
+            </span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
-            Day Trip: Historic Kamakura <span className="text-teal-400 text-2xl font-normal">鎌倉</span>
+            {isEs ? 'Excursión: Kamakura Histórico' : 'Day Trip: Historic Kamakura'}{' '}
+            <span className="text-teal-400 text-2xl font-normal">鎌倉</span>
           </h2>
         </div>
         <p className="text-xs sm:text-sm text-neutral-400 max-w-md">
-          A peaceful coastal sanctuary just 55 minutes south of Tokyo by direct train, famous for samurai heritage and monumental bronze artistry.
+          {isEs
+            ? 'Un pacífico santuario costero a solo 55 minutos al sur de Tokio en tren directo, célebre por su legado samurai y su monumental Buda de bronce.'
+            : 'A peaceful coastal sanctuary just 55 minutes south of Tokyo by direct train, famous for samurai heritage and monumental bronze artistry.'}
         </p>
       </div>
 
@@ -43,10 +51,10 @@ export default function DayTripSection({ grammarActive }: DayTripSectionProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#121622]" />
           <div className="absolute bottom-5 left-5 right-5">
             <span className="text-xs font-mono uppercase bg-teal-600/80 text-white px-3 py-1 rounded-full font-bold">
-              Kanagawa Prefecture (神奈川)
+              {isEs ? 'Prefectura de Kanagawa (神奈川)' : 'Kanagawa Prefecture (神奈川)'}
             </span>
             <h3 className="text-2xl font-black text-white mt-2">
-              The Great Buddha of Kotoku-in (高徳院の大仏)
+              {isEs ? 'El Gran Buda de Kotoku-in (高徳院の大仏)' : 'The Great Buddha of Kotoku-in (高徳院の大仏)'}
             </h3>
           </div>
         </div>
@@ -60,19 +68,35 @@ export default function DayTripSection({ grammarActive }: DayTripSectionProps) {
                 <Train className="w-4 h-4" />
               </div>
               <div className="flex-1">
-                <span className="text-neutral-400 block font-mono text-[10px]">Access Route:</span>
-                <span className="text-white font-semibold">Tokyo Station → Kamakura Station (55 mins)</span>
+                <span className="text-neutral-400 block font-mono text-[10px]">
+                  {isEs ? 'Ruta de Acceso:' : 'Access Route:'}
+                </span>
+                <span className="text-white font-semibold">
+                  {isEs ? 'Estación de Tokio → Estación de Kamakura (55 mins)' : 'Tokyo Station → Kamakura Station (55 mins)'}
+                </span>
               </div>
               <span className="text-teal-400 font-mono text-[11px] font-bold">JR Yokosuka Line</span>
             </div>
 
             {grammarActive ? (
               <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
-                For travelers seeking a break from the metropolis, Kamakura provides a quiet,{' '}
-                <GrammarBadge type="compound" active={grammarActive}>
-                  slow-paced
-                </GrammarBadge>{' '}
-                coastal escape. Surrounded by forested hills and the Pacific Ocean, this historic town served as the samurai capital of Japan in the 12th century.
+                {isEs ? (
+                  <>
+                    Para los viajeros que buscan una pausa del ritmo de la gran ciudad, Kamakura ofrece una escapada{' '}
+                    <GrammarBadge type="compound" active={grammarActive}>
+                      slow-paced (de ritmo tranquilo)
+                    </GrammarBadge>
+                    {' '}junto al mar. Rodeado de colinas boscosas y el océano Pacífico, este histórico pueblo fue la capital militar samurai de Japón en el siglo XII.
+                  </>
+                ) : (
+                  <>
+                    For travelers seeking a break from the metropolis, Kamakura provides a quiet,{' '}
+                    <GrammarBadge type="compound" active={grammarActive}>
+                      slow-paced
+                    </GrammarBadge>{' '}
+                    coastal escape. Surrounded by forested hills and the Pacific Ocean, this historic town served as the samurai capital of Japan in the 12th century.
+                  </>
+                )}
               </p>
             ) : (
               <EditableText
@@ -85,7 +109,7 @@ export default function DayTripSection({ grammarActive }: DayTripSectionProps) {
             {/* Highlights List */}
             <div className="space-y-2 pt-2">
               <span className="text-xs uppercase font-mono tracking-wider text-teal-400 block font-bold">
-                Must-Visit Highlights:
+                {isEs ? 'Lugares Destacados:' : 'Must-Visit Highlights:'}
               </span>
               <ul className="space-y-2">
                 {content.dayTrip.highlights.map((h, i) => (
@@ -102,8 +126,8 @@ export default function DayTripSection({ grammarActive }: DayTripSectionProps) {
           </div>
 
           <div className="pt-4 border-t border-neutral-800/80 text-[11px] text-neutral-400 flex justify-between items-center">
-            <span>Recommended Duration: Full-day trip</span>
-            <span className="text-teal-400 font-mono">Fare: ~¥950 each way</span>
+            <span>{isEs ? 'Duración recomendada: Excursión de día completo' : 'Recommended Duration: Full-day trip'}</span>
+            <span className="text-teal-400 font-mono">{isEs ? 'Tarifa: ~¥950 por trayecto' : 'Fare: ~¥950 each way'}</span>
           </div>
         </div>
       </div>

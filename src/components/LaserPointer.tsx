@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
+import { useSiteContent } from '../context/ContentContext';
 
 interface LaserPointerProps {
   active: boolean;
@@ -20,6 +21,9 @@ interface ClickRipple {
 }
 
 export default function LaserPointer({ active, onToggle }: LaserPointerProps) {
+  const { language } = useSiteContent();
+  const isEs = language === 'es';
+
   const [pos, setPos] = useState({ x: -100, y: -100 });
   const [trail, setTrail] = useState<Point[]>([]);
   const [ripples, setRipples] = useState<ClickRipple[]>([]);
@@ -66,7 +70,6 @@ export default function LaserPointer({ active, onToggle }: LaserPointerProps) {
     };
   }, [active, onToggle]);
 
-  // Clean trail periodically
   useEffect(() => {
     if (!active) return;
     const interval = setInterval(() => {
@@ -124,29 +127,30 @@ export default function LaserPointer({ active, onToggle }: LaserPointerProps) {
           transform: 'translate(-50%, -50%)',
         }}
       >
-        {/* Outer Halo */}
         <div className="w-8 h-8 rounded-full bg-red-600/30 blur-sm animate-pulse" />
-        {/* Middle Glow */}
         <div
           className="absolute inset-0 m-auto w-4 h-4 rounded-full bg-red-500"
           style={{
             boxShadow: '0 0 14px 4px #ff0055, 0 0 28px 8px #ff2a85',
           }}
         />
-        {/* Hot Center Core */}
         <div className="absolute inset-0 m-auto w-1.5 h-1.5 rounded-full bg-white shadow-sm" />
       </div>
 
       {/* Floating Status Indicator */}
       <div className="fixed bottom-5 right-5 pointer-events-auto bg-black/85 backdrop-blur-md border border-red-500/60 rounded-full px-4 py-2 flex items-center gap-3 text-xs text-white shadow-[0_0_20px_rgba(255,0,85,0.4)]">
         <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping" />
-        <span className="font-semibold tracking-wide">LASER PRESENTATION MODE ACTIVE</span>
-        <span className="text-neutral-400 text-[11px]">(Press &apos;L&apos; to toggle)</span>
+        <span className="font-semibold tracking-wide">
+          {isEs ? 'MODO PUNTERO LÁSER ACTIVO' : 'LASER PRESENTATION MODE ACTIVE'}
+        </span>
+        <span className="text-neutral-400 text-[11px]">
+          {isEs ? '(Presiona "L" para alternar)' : '(Press "L" to toggle)'}
+        </span>
         <button
           onClick={onToggle}
           className="bg-red-500/20 hover:bg-red-500/40 text-red-300 px-2 py-0.5 rounded text-[10px] font-mono border border-red-500/40 transition"
         >
-          Exit
+          {isEs ? 'Salir' : 'Exit'}
         </button>
       </div>
     </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, Utensils } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { useSiteContent } from '../context/ContentContext';
 import RamenCreatorInteractive from './RamenCreatorInteractive';
 import GrammarBadge from './GrammarBadge';
@@ -11,7 +11,8 @@ interface GastronomySectionProps {
 }
 
 export default function GastronomySection({ grammarActive }: GastronomySectionProps) {
-  const { content } = useSiteContent();
+  const { content, language } = useSiteContent();
+  const isEs = language === 'es';
 
   return (
     <section id="gastronomy" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto">
@@ -20,14 +21,21 @@ export default function GastronomySection({ grammarActive }: GastronomySectionPr
         <div>
           <div className="flex items-center gap-2 text-orange-400 text-xs font-semibold uppercase tracking-wider mb-2">
             <Sparkles className="w-4 h-4 text-orange-400" />
-            <span>Rubric Requirement 5 • Authentic Tokyo Gastronomy</span>
+            <span>
+              {isEs
+                ? 'Requisito de Rúbrica 5 • Gastronomía Auténtica de Tokio'
+                : 'Rubric Requirement 5 • Authentic Tokyo Gastronomy'}
+            </span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
-            Tokyo Food Culture <span className="text-orange-400 text-2xl font-normal">美食</span>
+            {isEs ? 'Cultura Culinaria de Tokio' : 'Tokyo Food Culture'}{' '}
+            <span className="text-orange-400 text-2xl font-normal">美食</span>
           </h2>
         </div>
         <p className="text-xs sm:text-sm text-neutral-400 max-w-md">
-          From Edo-period street fish counters to steamy noodle alleyways. Discover 3 quintessential dishes and build your own custom bowl in our interactive ramen studio.
+          {isEs
+            ? 'Desde los puestos callejeros de la era Edo hasta los humeantes callejones de fideos. Descubre 3 platos esenciales y crea tu propio tazón en nuestro taller interactivo de ramen.'
+            : 'From Edo-period street fish counters to steamy noodle alleyways. Discover 3 quintessential dishes and build your own custom bowl in our interactive ramen studio.'}
         </p>
       </div>
 
@@ -38,19 +46,35 @@ export default function GastronomySection({ grammarActive }: GastronomySectionPr
           <span>
             {grammarActive ? (
               <span>
-                Eating at a neighborhood ramen shop is{' '}
-                <GrammarBadge type="comparative" active={grammarActive}>
-                  less expensive than
-                </GrammarBadge>{' '}
-                reserving a dinner at a luxury sushi restaurant, but both offer an authentic taste of Japanese cuisine.
+                {isEs ? (
+                  <>
+                    Comer en una pequeña tienda de ramen es{' '}
+                    <GrammarBadge type="comparative" active={grammarActive}>
+                      less expensive than (menos costoso que)
+                    </GrammarBadge>
+                    {' '}reservar una cena en un restaurante de sushi de lujo, pero ambos ofrecen un sabor auténtico de la cocina japonesa.
+                  </>
+                ) : (
+                  <>
+                    Eating at a neighborhood ramen shop is{' '}
+                    <GrammarBadge type="comparative" active={grammarActive}>
+                      less expensive than
+                    </GrammarBadge>{' '}
+                    reserving a dinner at a luxury sushi restaurant, but both offer an authentic taste of Japanese cuisine.
+                  </>
+                )}
               </span>
             ) : (
-              <span>Eating at a neighborhood ramen shop is <strong>less expensive than</strong> reserving a dinner at a luxury sushi restaurant, but both offer an authentic taste of Japanese cuisine.</span>
+              <span>
+                {isEs
+                  ? 'Comer en una pequeña tienda de ramen es menos costoso que reservar en un sushi de lujo, pero ambos son auténticos.'
+                  : 'Eating at a neighborhood ramen shop is less expensive than reserving a dinner at a luxury sushi restaurant, but both offer an authentic taste of Japanese cuisine.'}
+              </span>
             )}
           </span>
         </div>
         <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-black/60 text-orange-300 shrink-0">
-          Comparative Grammar
+          {isEs ? 'Comparativo Gramatical' : 'Comparative Grammar'}
         </span>
       </div>
 
