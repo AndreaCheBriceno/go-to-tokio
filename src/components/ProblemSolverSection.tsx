@@ -53,13 +53,29 @@ export default function ProblemSolverSection() {
         </p>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-8 items-start">
-        {/* Left: 2 Problem Cards (5/12 width on desktop) */}
-        <div className="w-full lg:w-5/12 space-y-6 flex-shrink-0">
-          {content.problemSolutions.map((item, idx) => (
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+        {/* Right top: diner trying to order food (image) */}
+        <div className="w-full lg:col-start-2 lg:row-start-1 rounded-3xl overflow-hidden border border-neutral-800 bg-neutral-900 shadow-xl relative min-h-[260px]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/problems/diner-ordering.jpg"
+            alt={isEs ? 'Un turista intenta pedir comida en un restaurante japonés' : 'A tourist trying to order food in a Japanese restaurant'}
+            className="w-full h-auto block lg:absolute lg:inset-0 lg:h-full object-cover"
+            loading="lazy"
+          />
+          <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+            <p className="text-sm font-bold text-white">
+              {isEs ? '¿Cómo pido esto si el menú está en japonés?' : 'How do I order if the menu is only in Japanese?'}
+            </p>
+          </div>
+        </div>
+
+        {content.problemSolutions.map((item, idx) => (
             <div
               key={item.id}
-              className="glass-panel rounded-3xl p-6 sm:p-8 border border-neutral-800 hover:border-rose-500/30 transition flex flex-col justify-between shadow-xl"
+              className={`w-full glass-panel rounded-3xl p-6 sm:p-8 border border-neutral-800 hover:border-rose-500/30 transition flex flex-col justify-between shadow-xl ${
+                idx === 0 ? 'lg:col-start-1 lg:row-start-1' : 'lg:col-start-2 lg:row-start-2'
+              }`}
             >
               <div className="space-y-6">
                 <div className="flex items-center justify-between pb-4 border-b border-neutral-800">
@@ -167,14 +183,13 @@ export default function ProblemSolverSection() {
               </div>
             </div>
           ))}
-        </div>
-        
-        {/* Right: Subway simulation (7/12 width on desktop, sticky) */}
-        <div className="w-full lg:w-7/12 lg:sticky lg:top-24 mt-12 lg:mt-0">
-          <h3 className="text-xl font-bold text-white mb-4 text-center">
+
+        {/* Left bottom: Subway simulation (where the stations case used to be) */}
+        <div className="w-full lg:col-start-1 lg:row-start-2">
+          <h3 className="text-xl font-bold text-white mb-2">
             {isEs ? 'Explora las rutas del metro de Tokio' : 'Explore the Tokyo Subway Routes'}
           </h3>
-          <p className="text-sm text-neutral-400 max-w-2xl mx-auto text-center mb-8">
+          <p className="text-sm text-neutral-400 mb-4">
             {isEs 
               ? 'Entender el sistema de trenes es clave para sobrevivir en la ciudad. Aquí hay una simulación rápida.' 
               : 'Understanding the train system is key to surviving the city. Here is a quick simulation.'}

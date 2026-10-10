@@ -95,18 +95,16 @@ export default function CityOverviewSection() {
           </div>
         </div>
 
-        {/* 4 Stats Grid - Bigger */}
-        <div className="lg:col-span-5 z-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {/* 4 Stats Grid */}
+        <div className="lg:col-span-5 z-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
           {content.overview.stats.map((s, idx) => (
             <div
               key={idx}
-              className="glass-panel rounded-3xl p-8 border border-neutral-800 hover:border-pink-500/30 transition flex flex-col justify-between bg-black/60 backdrop-blur-md"
+              className="glass-panel rounded-2xl p-5 border border-neutral-800 hover:border-pink-500/30 transition flex flex-col justify-between gap-3 bg-black/60 backdrop-blur-md"
             >
-              <span className="text-sm font-mono uppercase text-neutral-400">{s.label}</span>
-              <div className="my-4">
-                <span className="text-4xl lg:text-5xl font-black text-white break-words">{s.value}</span>
-              </div>
-              <span className="text-sm font-semibold text-pink-400/90 break-words">{s.highlight}</span>
+              <span className="text-[11px] font-mono uppercase tracking-wider text-neutral-400">{s.label}</span>
+              <span className="text-xl sm:text-2xl font-extrabold leading-tight text-white">{s.value}</span>
+              <span className="text-xs font-semibold text-pink-400/90">{s.highlight}</span>
             </div>
           ))}
         </div>

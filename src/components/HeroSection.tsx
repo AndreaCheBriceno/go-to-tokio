@@ -79,70 +79,70 @@ export default function HeroSection() {
       </div>
 
       {/* City Profile Metrics Bar (City name, location, population) */}
-      <div className="w-full max-w-5xl glass-panel-glow rounded-3xl p-5 sm:p-6 grid grid-cols-2 lg:grid-cols-4 gap-4 text-left border border-cyan-500/30">
-        <div className="flex items-start gap-3 p-2">
-          <div className="w-9 h-9 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center shrink-0 border border-pink-500/30">
-            <MapPin className="w-5 h-5" />
+      <div className="w-full max-w-6xl glass-panel-glow rounded-3xl p-6 sm:p-9 grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-left border border-cyan-500/30">
+        <div className="flex items-start gap-4 p-2">
+          <div className="w-12 h-12 rounded-2xl bg-pink-500/20 text-pink-400 flex items-center justify-center shrink-0 border border-pink-500/30">
+            <MapPin className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-[11px] font-mono text-neutral-400 uppercase block">
+            <span className="text-xs font-mono tracking-wider text-neutral-400 uppercase block mb-1">
               {isEs ? 'Ubicación' : 'Location'}
             </span>
-            <span className="text-sm sm:text-base font-bold text-white block">
+            <span className="text-lg sm:text-2xl font-extrabold leading-tight text-white block">
               {isEs ? 'Isla de Honshu' : 'Honshu Island'}
             </span>
-            <span className="text-[11px] text-pink-300/80">
+            <span className="text-sm text-pink-300/80">
               {isEs ? 'Costa Oriental de Kanto' : 'Kanto Eastern Coast'}
             </span>
           </div>
         </div>
 
-        <div className="flex items-start gap-3 p-2">
-          <div className="w-9 h-9 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0 border border-cyan-500/30">
-            <Users className="w-5 h-5" />
+        <div className="flex items-start gap-4 p-2">
+          <div className="w-12 h-12 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0 border border-cyan-500/30">
+            <Users className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-[11px] font-mono text-neutral-400 uppercase block">
+            <span className="text-xs font-mono tracking-wider text-neutral-400 uppercase block mb-1">
               {isEs ? 'Población Urbana' : 'City Population'}
             </span>
-            <span className="text-sm sm:text-base font-bold text-white block">
+            <span className="text-lg sm:text-2xl font-extrabold leading-tight text-white block">
               {isEs ? 'Más de 14 Millones' : '14+ Million'}
             </span>
-            <span className="text-[11px] text-cyan-300/80">
+            <span className="text-sm text-cyan-300/80">
               {isEs ? 'Distritos Especiales' : 'Central Wards Area'}
             </span>
           </div>
         </div>
 
-        <div className="flex items-start gap-3 p-2">
-          <div className="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 border border-purple-500/30">
-            <Users className="w-5 h-5" />
+        <div className="flex items-start gap-4 p-2">
+          <div className="w-12 h-12 rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 border border-purple-500/30">
+            <Users className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-[11px] font-mono text-neutral-400 uppercase block">
+            <span className="text-xs font-mono tracking-wider text-neutral-400 uppercase block mb-1">
               {isEs ? 'Gran Área Metro' : 'Metro Population'}
             </span>
-            <span className="text-sm sm:text-base font-bold text-white block">
+            <span className="text-lg sm:text-2xl font-extrabold leading-tight text-white block">
               {isEs ? 'Más de 37 Millones' : '37+ Million'}
             </span>
-            <span className="text-[11px] text-purple-300/80">
+            <span className="text-sm text-purple-300/80">
               {isEs ? 'Región Metropolitana' : 'Greater Tokyo Region'}
             </span>
           </div>
         </div>
 
-        <div className="flex items-start gap-3 p-2">
-          <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 border border-amber-500/30">
-            <Calendar className="w-5 h-5" />
+        <div className="flex items-start gap-4 p-2">
+          <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 border border-amber-500/30">
+            <Calendar className="w-6 h-6" />
           </div>
           <div>
-            <span className="text-[11px] font-mono text-neutral-400 uppercase block">
+            <span className="text-xs font-mono tracking-wider text-neutral-400 uppercase block mb-1">
               {isEs ? 'Mejores Épocas' : 'Best Seasons'}
             </span>
-            <span className="text-sm sm:text-base font-bold text-white block">
+            <span className="text-lg sm:text-2xl font-extrabold leading-tight text-white block">
               {isEs ? 'Primavera y Otoño' : 'Spring & Autumn'}
             </span>
-            <span className="text-[11px] text-amber-300/80">
+            <span className="text-sm text-amber-300/80">
               {isEs ? 'Sakura y Arces Dorados' : 'Sakura & Autumn Leaves'}
             </span>
           </div>

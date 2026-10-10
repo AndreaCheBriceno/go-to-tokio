@@ -90,8 +90,8 @@ const SakuraPetalsOverlay = forwardRef<SakuraOverlayRef, { ambient?: boolean }>(
       window.addEventListener('resize', handleResize);
 
       // Cut ambient petals by 80% (initial seed of 5 petals instead of 25)
-      if (ambient && !prefersReduced && petalsRef.current.length < 5) {
-        for (let i = 0; i < 5; i++) {
+      if (ambient && !prefersReduced && petalsRef.current.length < 14) {
+        for (let i = 0; i < 14; i++) {
           const p = createPetal();
           p.y = Math.random() * window.innerHeight;
           petalsRef.current.push(p);
@@ -137,7 +137,7 @@ const SakuraPetalsOverlay = forwardRef<SakuraOverlayRef, { ambient?: boolean }>(
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // Cap ambient count to ~8-10 petals (80% cut from original 50 limit)
-        if (ambient && !prefersReduced && Math.random() < 0.015 && petalsRef.current.length < 9) {
+        if (ambient && !prefersReduced && Math.random() < 0.04 && petalsRef.current.length < 18) {
           petalsRef.current.push(createPetal());
         }
 
@@ -152,7 +152,7 @@ const SakuraPetalsOverlay = forwardRef<SakuraOverlayRef, { ambient?: boolean }>(
 
           // Recycle or remove petals that leave the viewport
           if (p.y > canvas.height + 25 || p.x > canvas.width + 40 || p.x < -40) {
-            if (ambient && !prefersReduced && petalsRef.current.length <= 8) {
+            if (ambient && !prefersReduced && petalsRef.current.length <= 17) {
               petalsRef.current[idx] = createPetal();
             } else {
               petalsRef.current.splice(idx, 1);
